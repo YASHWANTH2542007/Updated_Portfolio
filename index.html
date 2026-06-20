@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <title>Yashwanth - Frontend Developer</title>
+
+    <!-- ====== Google Fonts ====== -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+
+    <!-- ====== ALL CSS ====== -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/lightbox.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="icon" href="assets/webfonts/favicon.ico">
+
+    <style>
+        /* ── Hero: no-image gradient background ── */
+        .hero-no-img-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 40%, #16213e 70%, #0f3460 100%);
+        }
+        .hero-no-img-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 70% 50%, rgba(99,102,241,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 20% 80%, rgba(16,185,129,0.10) 0%, transparent 50%);
+        }
+
+        /* ── About: dev card ── */
+        .about-dev-card {
+            height: 100%;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .dev-card-inner {
+            text-align: center;
+            padding: 40px 30px;
+            width: 100%;
+        }
+        .dev-card-avatar {
+            font-size: 80px;
+            color: #555;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+        .dev-card-name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 6px;
+            letter-spacing: 1px;
+        }
+        .dev-card-role {
+            color: #aaa;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .dev-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+        .dev-card-tags span {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #ccc;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+        }
+        .dev-card-location {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .dev-card-location i { margin-right: 5px; }
+        .dev-card-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #1a2a1a;
+            border: 1px solid #2a4a2a;
+            color: #4ade80;
+            font-size: 12px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+            letter-spacing: 0.5px;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.7); }
+        }
+        .about-dev-card .social-aria {
+            position: static;
+            transform: none;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        /* ── Portfolio: gradient project cards ── */
+        .portfolio-link {
+            display: block;
+            text-decoration: none;
+        }
+        .portfolio-link:hover {
+            text-decoration: none;
+        }
+        .single-portfolio {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .proj-card-body {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            transition: opacity 0.3s ease;
+        }
+        .proj-icon {
+            font-size: 42px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 12px;
+        }
+        .proj-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 6px;
+            letter-spacing: 0.5px;
+        }
+        .proj-tech {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .proj-visit {
+            position: absolute;
+            bottom: 14px;
+            right: 16px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            z-index: 2;
+            transition: color 0.3s;
+        }
+        .single-portfolio:hover .proj-visit {
+            color: #fff;
+        }
+
+        /* Individual card gradients */
+        .proj-railease  { background: linear-gradient(135deg, #1a1a2e, #0f3460); }
+        .proj-redbox    { background: linear-gradient(135deg, #3a0000, #8b0000); }
+        .proj-moneymate { background: linear-gradient(135deg, #1a2a00, #3a5a00); }
+        .proj-bookbee   { background: linear-gradient(135deg, #2a1a00, #7a4500); }
+        .proj-chatbot   { background: linear-gradient(135deg, #001a2a, #004a6a); }
+        .proj-mindcare  { background: linear-gradient(135deg, #1a002a, #4a006a); }
+
+        /* Hover overlay */
+        .single-portfolio .portfolio-hover {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.55);
+            padding: 14px 16px;
+            transform: translateY(100%);
+            transition: transform 0.35s ease;
+        }
+        .single-portfolio:hover .portfolio-hover {
+            transform: translateY(0);
+        }
+        .portfolio-hover h4 {
+            color: #fff;
+            margin: 0;
+            font-size: 15px;
+        }
+        .portfolio-hover h4 span {
+            display: block;
+            font-size: 12px;
+            color: rgba(255,255,255,0.65);
+            font-weight: 400;
+            margin-top: 3px;
+        }
+
+        /* ── Portfolio: project cards ── */
+        .portfolio-link {
+            display: block;
+            text-decoration: none;
+        }
+        .portfolio-link:hover { text-decoration: none; }
+        .single-portfolio.proj-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .single-portfolio.proj-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+        }
+        .proj-card-body {
+            padding: 36px 28px 52px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+        .proj-icon {
+            font-size: 32px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 14px;
+        }
+        .proj-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 6px;
+        }
+        .proj-sub {
+            color: rgba(255,255,255,0.75);
+            font-size: 13px;
+            margin: 0 0 10px;
+        }
+        .proj-tech {
+            color: rgba(255,255,255,0.45);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .proj-visit {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.35);
+            color: #fff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 28px;
+            z-index: 2;
+            transition: background 0.3s;
+        }
+        .single-portfolio.proj-card:hover .proj-visit {
+            background: rgba(0,0,0,0.6);
+        }
+        .proj-visit i { margin-right: 6px; }
+    </style>
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar-nav">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
+        </div>
+    </div>
+    <!-- // Preloader -->
+
+    <!-- ====== Header ====== -->
+    <header id="header" class="header">
+        <!-- ====== Navbar ====== -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <!-- Logo -->
+                <!-- <a class="navbar-brand logo" href="index.html">
+                    <img src="assets/images/logo.png" alt="Yashwanth">
+                </a> -->
+                <!-- // Logo -->
+
+                <!-- Mobile Menu -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false"><span><i class="fa fa-bars"></i></span></button>
+                <!-- Mobile Menu -->
+
+                <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="#home">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">ABOUT</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#service">SKILLS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">PROJECTS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#education">EDUCATION</a></li>
+                        <li class="nav-item"><a class="nav-link pr0" href="#contact">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- ====== // Navbar ====== -->
+    </header>
+    <!-- ====== // Header ====== -->
+
+    <!-- ====== Hero Area ====== -->
+    <div class="hero-aria" id="home">
+        <!-- Hero Area Content -->
+        <div class="container">
+            <div class="hero-content h-100">
+                <div class="d-table">
+                    <div class="d-table-cell">
+                        <h2 class="text-uppercase">Hi, I'm Yashwanth</h2>
+                        <h3 class="text-uppercase"><span class="typed"></span></h3>
+                        <p>Passionate about building clean, responsive, and user-friendly web experiences.</p>
+                        <a href="#portfolio" class="button smooth-scroll">View My Work</a>
+                        <a href="#contact" class="button smooth-scroll" style="margin-left:15px; background:transparent; border:2px solid #fff;">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- // Hero Area Content -->
+        <!-- Hero Background — CSS gradient, no image needed -->
+        <div class="hero-no-img-bg"></div>
+        <!-- // Hero Background -->
+    </div>
+    <!-- ====== //Hero Area ====== -->
+
+    <!-- ====== Featured Area ====== -->
+    <section id="featured" class="section-padding pb-70">
+        <div class="container">
+            <div class="row">
+                <!-- single featured item -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-featured-item-wrap">
+                        <h3><a href="#">Frontend Development</a></h3>
+                        <div class="single-featured-item">
+                            <div class="featured-icon">
+                                <i class="fa fa-code"></i>
+                            </div>
+                            <p>I build responsive, accessible websites using HTML5, CSS3, and JavaScript. I focus on clean code, fast load times, and smooth user experiences across all devices.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- single featured item -->
+                <!-- single featured item -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-featured-item-wrap">
+                        <h3><a href="#">UI Design</a></h3>
+                        <div class="single-featured-item">
+                            <div class="featured-icon">
+                                <i class="fa fa-paint-brush"></i>
+                            </div>
+                            <p>I design clean, intuitive interfaces with a strong eye for layout, typography, and color. I use tools like Figma to translate ideas into polished, user-centred designs.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- single featured item -->
+                <!-- single featured item -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-featured-item-wrap">
+                        <h3><a href="#">AI-Driven Projects</a></h3>
+                        <div class="single-featured-item">
+                            <div class="featured-icon">
+                                <i class="fa fa-brain"></i>
+                            </div>
+                            <p>Exploring the intersection of AI and web. Completed the 1M1B AI for Sustainability internship in collaboration with IBM SkillsBuild and AICTE, building socially impactful concepts.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- single featured item -->
+            </div>
+        </div>
+    </section>
+    <!-- ====== //Featured Area ====== -->
+
+    <!-- ====== About Area ====== -->
+    <section id="about" class="section-padding about-area bg-light">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center">
+                        <h2>About Me</h2>
+                        <p>A little bit about who I am and what drives me.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- //Section Title -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-dev-card">
+                        <div class="dev-card-inner">
+                            <div class="dev-card-avatar">
+                                <i class="fa fa-user-circle"></i>
+                            </div>
+                            <h3 class="dev-card-name">Yashwanth</h3>
+                            <p class="dev-card-role">Frontend Developer</p>
+                            <div class="dev-card-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>React</span>
+                                <span>Bootstrap</span>
+                                <span>Git</span>
+                                <span>AI</span>
+                            </div>
+                            <div class="dev-card-location">
+                                <i class="fa fa-map-marker-alt"></i> Chennai, India
+                            </div>
+                            <div class="dev-card-status">
+                                <span class="status-dot"></span> Open to Opportunities
+                            </div>
+                            <!-- Social Link -->
+                            <div class="social-aria">
+                                <a target="_blank" href="https://github.com/YASHWANTH2542007"><i class="fab fa-github"></i></a>
+                                <a target="_blank" href="https://www.linkedin.com/in/yash-b27668318/"><i class="fab fa-linkedin"></i></a>
+                                <a target="_blank" href="https://www.instagram.com/yaashh7__/"><i class="fab fa-instagram"></i></a>
+                                <a target="_blank" href="https://leetcode.com/u/__yash25__/" class="leetcode-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align:middle;">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- // Social Link -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2>Hello, I am <span>Yashwanth</span></h2>
+                        <h4>Frontend Developer & CS(AI)Student</h4>
+                        <p>I'm a final-year student at TJS College of Arts and Science, passionate about creating beautiful and functional web experiences. I love turning ideas into reality through code — from pixel-perfect layouts to interactive user interfaces.</p>
+                        <p>Beyond the classroom, I've worked on real-world projects like a student budget tracker (MoneyMate) and an AI-powered mental health support concept (MindCare AI) as part of the 1M1B AI for Sustainability Virtual Internship with IBM SkillsBuild and AICTE — aligned with UN SDGs 3, 4, and 10.</p>
+                        <p>I'm actively looking for frontend developer opportunities where I can grow, contribute, and build things that matter.</p>
+
+                        <a href="assets/Yashwanth-Resume.pdf" class="button" download>Download Resume</a>
+
+                        <h5 style="margin-top:30px;">My Skills</h5>
+
+                        <!-- Skill Area -->
+                        <div id="skills" class="skill-area">
+
+                            <!-- Single skill -->
+                            <div class="single-skill">
+                                <div class="skillbar" data-percent="90%">
+                                    <div class="skillbar-title"><span>HTML5</span></div>
+                                    <div class="skillbar-bar"></div>
+                                    <div class="skill-bar-percent">90%</div>
+                                </div>
+                            </div>
+
+                            <!-- Single skill -->
+                            <div class="single-skill">
+                                <div class="skillbar" data-percent="80%">
+                                    <div class="skillbar-title"><span>CSS3</span></div>
+                                    <div class="skillbar-bar"></div>
+                                    <div class="skill-bar-percent">80%</div>
+                                </div>
+                            </div>
+
+                            <!-- Single skill -->
+                            <div class="single-skill">
+                                <div class="skillbar" data-percent="70%">
+                                    <div class="skillbar-title"><span>JavaScript</span></div>
+                                    <div class="skillbar-bar"></div>
+                                    <div class="skill-bar-percent">70%</div>
+                                </div>
+                            </div>
+
+                            <!-- Single skill -->
+                            <div class="single-skill">
+                                <div class="skillbar" data-percent="65%">
+                                    <div class="skillbar-title"><span>React</span></div>
+                                    <div class="skillbar-bar"></div>
+                                    <div class="skill-bar-percent">65%</div>
+                                </div>
+                            </div>
+
+                            <!-- Single skill -->
+                            <div class="single-skill">
+                                <div class="skillbar" data-percent="75%">
+                                    <div class="skillbar-title"><span>Bootstrap</span></div>
+                                    <div class="skillbar-bar"></div>
+                                    <div class="skill-bar-percent">75%</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- //Skill Area -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== // About Area ====== -->
+
+
+    <!-- ====== Fact Counter Section ====== -->
+    <section class="section-padding pb-70 bg-img fact-counter" id="counter" style="background-image: url(assets/images/fan-fact-bg.jpg)">
+        <div class="container">
+            <div class="row">
+                <!-- Single Fact Counter -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="single-fun-fact">
+                        <h2><span class="counter-value" data-count="10">0</span>+</h2>
+                        <p>Projects Built</p>
+                    </div>
+                </div>
+                <!-- Single Fact Counter -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="single-fun-fact">
+                        <h2><span class="counter-value" data-count="5">0</span>+</h2>
+                        <p>Certifications</p>
+                    </div>
+                </div>
+                <!-- Single Fact Counter -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="single-fun-fact">
+                        <h2><span class="counter-value" data-count="8">0</span>+</h2>
+                        <p>Technologies Learned</p>
+                    </div>
+                </div>
+                <!-- Single Fact Counter -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="single-fun-fact">
+                        <h2><span class="counter-value" data-count="500">0</span>+</h2>
+                        <p>Hours of Coding</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== //Fact Counter Section ====== -->
+
+    <!-- ====== Service / What I Do Section ====== -->
+    <section id="service" class="section-padding pb-70 service-area bg-light">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center">
+                        <h2>What I Do</h2>
+                        <p>Technologies and tools I work with to build web experiences.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- //Section Title -->
+
+            <div class="row">
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fa fa-code"></i>
+                        </div>
+                        <h2>Web Development</h2>
+                        <p>Building websites with semantic HTML5, modern CSS3 (Flexbox, Grid), and vanilla JavaScript. I care about clean, readable, and maintainable code.</p>
+                    </div>
+                </div>
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <h2>React Development</h2>
+                        <p>Building component-based UIs with React, managing state with hooks, and creating single-page applications with a focus on performance and reusability.</p>
+                    </div>
+                </div>
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fa fa-mobile-alt"></i>
+                        </div>
+                        <h2>Responsive Design</h2>
+                        <p>Every project I build is fully responsive — designed mobile-first and tested across screen sizes using Bootstrap, CSS Grid, and media queries.</p>
+                    </div>
+                </div>
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <h2>Version Control</h2>
+                        <p>Using Git and GitHub for source control, managing branches, writing meaningful commit messages, and keeping projects organised and collaborative.</p>
+                    </div>
+                </div>
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fa fa-paint-brush"></i>
+                        </div>
+                        <h2>UI / Figma</h2>
+                        <p>Designing wireframes and mockups in Figma before writing code. Understanding design systems, spacing, and visual hierarchy to bridge design and development.</p>
+                    </div>
+                </div>
+                <!-- Single Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-service">
+                        <div class="service-icon">
+                            <i class="fa fa-robot"></i>
+                        </div>
+                        <h2>AI Integration</h2>
+                        <p>Exploring how to integrate AI APIs and tools into web interfaces. Interned on an AI-driven student wellness platform aligned with UN Sustainable Development Goals.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ====== //Service Section ====== -->
+
+    <!-- ====== Portfolio Section ====== -->
+    <section id="portfolio" class="section-padding pb-85 portfolio-area bg-light">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center">
+                        <h2>My Projects</h2>
+                        <p>A selection of things I've built — from class assignments to personal projects.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- //Section Title -->
+            <div class="row justify-content-center">
+                <!-- Work List Menu-->
+                <!-- <div class="col-lg-8">
+                    <div class="work-list text-center">
+                        <ul>
+                            <li class="filter" class="active" data-filter="all">ALL</li>
+                            <li class="filter" data-filter=".web">Web Dev</li>
+                            <li class="filter" data-filter=".react">React</li>
+                            <li class="filter" data-filter=".ai">AI / ML</li>
+                            <li class="filter" data-filter=".ui">UI Design</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row portfolio">
+
+                <!-- 1. RailEase -->
+                <div class="col-lg-4 col-md-6 mix web">
+                    <a href="https://trainbooking-sandy.vercel.app/" target="_blank" class="portfolio-link">
+                        <div class="single-portfolio proj-card" style="background: linear-gradient(135deg,#1a237e,#283593);">
+                            <div class="proj-card-body">
+                                <div class="proj-icon"><i class="fa fa-train"></i></div>
+                                <h3 class="proj-title">RailEase</h3>
+                                <p class="proj-sub">Smart Train Booking Assistant</p>
+                                <p class="proj-tech">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript</p>
+                            </div>
+                            <div class="portfolio-hover">
+                                <h4>RailEase <span>Train Booking App</span></h4>
+                            </div>
+                            <div class="proj-visit"><i class="fa fa-external-link-alt"></i> Visit Project</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 2. The Red Box -->
+                <div class="col-lg-4 col-md-6 mix web ui">
+                    <a href="https://red-box-website.vercel.app/" target="_blank" class="portfolio-link">
+                        <div class="single-portfolio proj-card" style="background: linear-gradient(135deg,#7f0000,#b71c1c);">
+                            <div class="proj-card-body">
+                                <div class="proj-icon"><i class="fa fa-utensils"></i></div>
+                                <h3 class="proj-title">The Red Box</h3>
+                                <p class="proj-sub">Indo-Chinese Restaurant Website</p>
+                                <p class="proj-tech">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript</p>
+                            </div>
+                            <div class="portfolio-hover">
+                                <h4>The Red Box <span>Restaurant Website</span></h4>
+                            </div>
+                            <div class="proj-visit"><i class="fa fa-external-link-alt"></i> Visit Project</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 3. MoneyMate -->
+                <div class="col-lg-4 col-md-6 mix web">
+                    <a href="https://money-mate-dun.vercel.app/" target="_blank" class="portfolio-link">
+                        <div class="single-portfolio proj-card" style="background: linear-gradient(135deg,#1b1b00,#3e3000);">
+                            <div class="proj-card-body">
+                                <div class="proj-icon"><i class="fa fa-wallet"></i></div>
+                                <h3 class="proj-title">MoneyMate</h3>
+                                <p class="proj-sub">Student Budget Tracker</p>
+                                <p class="proj-tech">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript</p>
+                            </div>
+                            <div class="portfolio-hover">
+                                <h4>MoneyMate <span>Student Budget Tracker</span></h4>
+                            </div>
+                            <div class="proj-visit"><i class="fa fa-external-link-alt"></i> Visit Project</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 4. BookBee -->
+                <div class="col-lg-4 col-md-6 mix web ui">
+                    <a href="https://book-shop-website.vercel.app/" target="_blank" class="portfolio-link">
+                        <div class="single-portfolio proj-card" style="background: linear-gradient(135deg,#1a0030,#4a0072);">
+                            <div class="proj-card-body">
+                                <div class="proj-icon"><i class="fa fa-book"></i></div>
+                                <h3 class="proj-title">BookBee</h3>
+                                <p class="proj-sub">Online Book Store</p>
+                                <p class="proj-tech">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript</p>
+                            </div>
+                            <div class="portfolio-hover">
+                                <h4>BookBee <span>Online Book Store</span></h4>
+                            </div>
+                            <div class="proj-visit"><i class="fa fa-external-link-alt"></i> Visit Project</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 5. Gemini Chatbot -->
+                <div class="col-lg-4 col-md-6 mix ai">
+                    <a href="https://gemini-chatbot-six-coral.vercel.app/" target="_blank" class="portfolio-link">
+                        <div class="single-portfolio proj-card" style="background: linear-gradient(135deg,#003300,#1b5e20);">
+                            <div class="proj-card-body">
+                                <div class="proj-icon"><i class="fa fa-robot"></i></div>
+                                <h3 class="proj-title">Gemini Chatbot</h3>
+                                <p class="proj-sub">AI Chat Interface</p>
+                                <p class="proj-tech">JavaScript &nbsp;·&nbsp; Gemini API</p>
+                            </div>
+                            <div class="portfolio-hover">
+                                <h4>Gemini Chatbot <span>AI Chat Interface</span></h4>
+                            </div>
+                            <div class="proj-visit"><i class="fa fa-external-link-alt"></i> Visit Project</div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ====== // Portfolio Section ====== -->
+
+
+    <!-- ====== Education & Certifications Section ====== -->
+    <section id="education" class="section-padding faq-area bg-secondary">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center faq-title">
+                        <h2>Education & Certifications</h2>
+                        <p>My academic background and credentials earned along the way.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- //Section Title -->
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="faq-bg bg-img" style="background-image: url(assets/images/faq.jpeg)"></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="faq-content" id="accordion">
+
+                        <!-- Education -->
+                        <div class="single-faq">
+                            <h4 class="collapsed" data-toggle="collapse" data-target="#edu-1">🎓 TJS College of Arts and Science</h4>
+                            <div id="edu-1" class="collapse show" data-parent="#accordion">
+                                <div class="faq-body">
+                                    <strong>B.Sc. Computer Science</strong> — Currently pursuing my degree with a focus on web technologies, software development, and AI. Active participant in college tech events and coding competitions.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Internship -->
+                        <div class="single-faq">
+                            <h4 class="collapsed" data-toggle="collapse" data-target="#edu-2">💼 1M1B AI for Sustainability Internship</h4>
+                            <div id="edu-2" class="collapse" data-parent="#accordion">
+                                <div class="faq-body">
+                                    <strong>Virtual Internship — IBM SkillsBuild × AICTE</strong><br>
+                                    Developed <em>MindCare AI</em>, an AI-powered student mental health support system concept aligned with UN SDGs 3 (Good Health), 4 (Quality Education), and 10 (Reduced Inequalities). Delivered as a full 15-slide presentation with system architecture, roadmap, and responsible AI framing.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification 1 -->
+                        <div class="single-faq">
+                            <h4 class="collapsed" data-toggle="collapse" data-target="#edu-3">📜 IBM SkillsBuild — AI Fundamentals</h4>
+                            <div id="edu-3" class="collapse" data-parent="#accordion">
+                                <div class="faq-body">
+                                    Completed the IBM SkillsBuild AI Fundamentals course covering machine learning concepts, responsible AI, and practical applications of AI in real-world problem-solving contexts.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification 2 -->
+                        <div class="single-faq">
+                            <h4 class="collapsed" data-toggle="collapse" data-target="#edu-4">📜 freeCodeCamp — Responsive Web Design</h4>
+                            <div id="edu-4" class="collapse" data-parent="#accordion">
+                                <div class="faq-body">
+                                    Earned the freeCodeCamp Responsive Web Design certification, covering HTML5, CSS3, accessibility, flexbox, CSS grid, and building responsive projects from scratch.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== // Education & Certifications Section ====== -->
+
+
+    <!-- ====== Call to Action Area ====== -->
+    <section class="section-padding call-to-action-aria bg-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h2>Open to Internships & Junior Frontend Roles</h2>
+                    <p>I'm actively looking for opportunities to grow as a frontend developer. If you're looking for someone eager, hardworking, and passionate about building great web experiences — let's talk!</p>
+                </div>
+                <div class="col-lg-3">
+                    <div class="cta-button">
+                        <div class="d-table">
+                            <div class="d-table-cell">
+                                <a href="#contact" class="button">Contact Me</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== // Call to Action Area ====== -->
+
+
+    <!-- ====== Contact Area ====== -->
+    <section id="contact" class="section-padding contact-section bg-light">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center">
+                        <h2>Get In Touch</h2>
+                        <p>Have a project in mind, want to collaborate, or just want to say hi? I'd love to hear from you.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- //Section Title -->
+
+            <!-- Contact Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <form id="contact-form" action="mail.php" method="post" class="contact-form bg-white">
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input type="text" class="form-control" name="name" required placeholder="Your Name">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <input type="email" class="form-control" name="email" required placeholder="Your Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" required placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="" class="form-control" required placeholder="Your Message"></textarea>
+                        </div>
+                        <div class="form-btn text-center">
+                            <button class="button" type="submit">Send Message</button>
+                            <p class="form-message"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- // Contact Form -->
+        </div>
+    </section>
+    <!-- ====== // Contact Area ====== -->
+
+
+    <!-- ====== Footer Area ====== -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+                        <p class="text-white">&copy; 2026 Yashwanth &mdash; Designed with ❤️ | 
+                            <a href="https://github.com/YASHWANTH2542007" target="_blank">GitHub</a> &nbsp;|&nbsp; 
+                            <a href="https://www.linkedin.com/in/yash-b27668318/" target="_blank">LinkedIn</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ====== // Footer Area ====== -->
+
+
+    <!-- ====== ALL JS ====== -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/lightbox.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.mixitup.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/typed.js"></script>
+    <script src="assets/js/skill.bar.js"></script>
+    <script src="assets/js/fact.counter.js"></script>
+    <script src="assets/js/main.js"></script>
+
+<!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init({ publicKey: "Pj74tfMnLF4FnaN6d" });
+        })();
+ 
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+ 
+            var btn = this.querySelector('button[type="submit"]');
+            var formMessage = this.querySelector('.form-message');
+ 
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+ 
+            var templateParams = {
+                from_name:    this.querySelector('[name="name"]').value,
+                from_email:   this.querySelector('[name="email"]').value,
+                subject:      this.querySelector('[name="subject"]').value,
+                message:      this.querySelector('[name="message"]').value,
+            };
+ 
+            emailjs.send("service_mj0871j", "template_9xfoihc", templateParams)
+                .then(function () {
+                    formMessage.textContent = 'Thank you! Your message has been sent.';
+                    formMessage.classList.add('success');
+                    document.getElementById('contact-form').reset();
+                    btn.textContent = 'Send Message';
+                    btn.disabled = false;
+                }, function (error) {
+                    formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+                    formMessage.classList.add('error');
+                    btn.textContent = 'Send Message';
+                    btn.disabled = false;
+                });
+        });
+    </script>
+ 
+</body>
+ 
+</html>
+ 
