@@ -1963,6 +1963,38 @@ input:-webkit-autofill {
         }
         .proj-visit i { margin-right: 6px; }
 
+/* ====== Extra: mobile polish for custom sections ====== */
+.hero-content .button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .hero-content { max-width: 88%; }
+    .hero-content .button {
+        display: block;
+        width: 100%;
+        margin: 0 0 12px !important;
+        text-align: center;
+    }
+    .about-dev-card { min-height: auto; }
+    .dev-card-inner { padding: 30px 18px; }
+    .dev-card-avatar { font-size: 60px; }
+    .proj-card-body { padding: 26px 20px 46px; }
+    .proj-title { font-size: 19px; }
+    .single-portfolio.proj-card { min-height: 180px; }
+    .contact-form { text-align: center; }
+    .form-message { word-break: break-word; }
+    .skillbar-title { width: 90px; }
+    .skillbar-title span { padding: 0 12px; }
+}
+
+@media only screen and (max-width: 400px) {
+    .dev-card-tags span { font-size: 10px; padding: 3px 8px; }
+    .proj-icon { font-size: 26px; }
+    .navbar-toggler { padding: 4px 8px; }
+}
+
 /* ====== Extra: typed cursor blink + accordion caret ====== */
 .typed-cursor {
     animation: typed-blink 0.8s infinite;
