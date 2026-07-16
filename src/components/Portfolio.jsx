@@ -46,7 +46,7 @@ const PROJECTS = [
   },
   {
     key: 'mindcare',
-    href: 'https://mindcare-ai-navy.vercel.app/login',
+    href: 'https://mindcare-ai-navy.vercel.app/',
     gradient: 'linear-gradient(135deg,#1a002a,#4a006a)',
     icon: 'fa fa-heartbeat',
     title: 'MindCare AI',
