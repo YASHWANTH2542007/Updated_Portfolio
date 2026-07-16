@@ -1995,6 +1995,36 @@ input:-webkit-autofill {
     .navbar-toggler { padding: 4px 8px; }
 }
 
+/* ====== Extra: hero text contrast + mobile sizing (keeps yellow/navy split) ====== */
+.hero-content h3,
+.hero-content p {
+    color: #fff;
+}
+
+@media only screen and (max-width: 767px) {
+    .hero-content {
+        max-width: 92% !important;
+        padding: 0 20px;
+    }
+    .hero-content h2 {
+        font-size: 34px !important;
+        line-height: 1.15 !important;
+    }
+    .hero-content h3 {
+        font-size: 16px !important;
+        margin: 12px 0 !important;
+    }
+    .hero-content p {
+        font-size: 14px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .hero-content h2 {
+        font-size: 28px !important;
+    }
+}
+
 /* ====== Extra: typed cursor blink + accordion caret ====== */
 .typed-cursor {
     animation: typed-blink 0.8s infinite;
