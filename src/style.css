@@ -2034,3 +2034,21 @@ input:-webkit-autofill {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
 }
+
+/* ====== Certifications link button: mobile responsiveness ====== */
+@media only screen and (max-width: 767px) {
+    .faq-content .button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .single-faq h4 {
+        font-size: 18px;
+        padding: 8px 45px 8px 12px;
+    }
+    .faq-body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}

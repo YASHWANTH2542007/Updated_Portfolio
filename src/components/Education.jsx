@@ -64,6 +64,19 @@ export default function Education() {
                 </div>
               ))}
             </div>
+
+            <div className="text-center" style={{ marginTop: 30 }}>
+              <a
+                href="https://drive.google.com/drive/folders/1KCvj0x1w-EBpszkYbnkA1-6NO38MUK-T?usp=drive_link"
+                target="_blank"
+                rel="noreferrer"
+                className="button"
+                style={{ color: '#000' }}
+              >
+                <i className="fa fa-certificate" style={{ marginRight: 8 }}></i>
+                View All Certifications
+              </a>
+            </div>
           </div>
         </div>
       </div>
