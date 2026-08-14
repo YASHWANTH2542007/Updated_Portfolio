@@ -62,6 +62,15 @@ const PROJECTS = [
     sub: 'AI-Powered Productivity Assistant',
     tech: 'AI Integration · Productivity',
   },
+  {
+    key: 'aifactoryvision',
+    href: 'https://ai-factory-vision-fapevxbgurz56tuuhrnc8j.streamlit.app/',
+    gradient: 'linear-gradient(135deg,#0a1f0a,#1e5c1e)',
+    icon: 'fa fa-industry',
+    title: 'AI Factory Vision',
+    sub: 'AI-Powered Factory Monitoring System',
+    tech: 'Python · Streamlit · AI',
+  },
 ]
 
 export default function Portfolio() {
